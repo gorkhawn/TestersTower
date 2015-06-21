@@ -1,2 +1,6 @@
 # TestersTower
-Just testing things. Nothing spectacular here. Try "holymoly" repo instead.
+Just testing things. Inline edit comment. Nothing spectacular here. Try "holymoly" repo instead.
+
+# Header.
+
+Well then. This was interesting.
