@@ -1,0 +1,70 @@
+Context:
+Product under test is a television with the possibility of connecting to a mobile device (for example, to play videos from Youtube or Netflix). When playing video the mobile device should be able to control the volume of the television. The scope of your testing is the Volume Control software module (inside the television), isolated into the test console, so the focus of testing is only the internal logic of that component. 
+
+Assignment:
+Analyze the component specification and create an artifact to show necessary combinations to cover this component. Also, note the bugs in the component. The component can be controlled via the test console. The test console will produce a log of your actions.
+
+Exercise outputs:
+At the end of the exercise I expect from you:
+
+   * A small document/picture/mindmap that shows what kind of combinations need to be tested. This doesn't need to be fully detailed, but clear enough to communicate test coverage to developers and testers. And to give some pointers of important combinations for testing
+later on with the full product software.
+ 
+   * List of bugs found
+   * The log(s) from the test console
+
+Note! - To get the log files the test console must be exited with "exit."
+        Closing from the window with "x" will not work.
+
+Volume Control component specifications v2:
+
+ The software module controls the volume of the TV according to user actions. 
+ User can increase/decrease the volume, mute on TV or via mobile device. 
+ The component must handle volume handling when mobile device is connected.
+ The goal is to minimize the situation when using mobile device creates big 
+ increases in TV volume.
+
+ Requirements:
+   * TV Volume can be increased or decreased in 2 steps, in range of 0..90
+   * Increasing/decreasing volume via TV also demutes
+   * Mute command toggles mute on/off 
+   * Mobile device volume can be increased or decreased in 1 steps, in range of 0..20
+   * Mobile device can not increase TV volume over the current TV volume value when connected
+   * Connecting mobile device must set the current volume level according to mobile device
+   * Disconnecting mobile device must restore the volume to a level that was before connecting
+     - When volume was changed via TV while connected that new value must be respected
+   * Demuting volume over 70, must set volume to 70 first
+
+ For example:
+   * #1: 
+      TV vol is set to 20. Connecting mobile device with max volume, 
+      then every step down on mobile device the TV volume will be decreased by 1 step.  
+   * #2:
+      TV vol is set to 40. Connecting mobile device with volume set to 10, 
+      then TV volume will be set to 20, and increasing the volume to maximum on mobile device will 
+      increase the TV back to 40.
+   * #3:
+      TV vol is set to 20. Connecting mobile device with volume set to 10,
+      then TV volume will be set to 10. Increasing TV volume 5 times, will put the TV volume to 15 and
+      after disconnecting set the TV volume to 30. 
+
+
+
+Available Test Console commands:
+ reset - initializes the component to default - volume tv=20, mobile=10 unmuted, state=disconnected. Clears memory. 
+ tvsetinitvol ## - Set initial volume in tv, before connecting device. Values 0..90. Alias 'tsiv' 
+ tvincvol - increment volume on TV. Alias 'tiv' 
+ tvdecvol - decrement volume on TV. Alias 'tdv' 
+ mute - Toggles Mute TV volume
+ connect - Connects the mobile device. Alias 'cnt' 
+ disconnect - Disconnects the mobile device. Alias 'dcnt' 
+ mobilesetinitvol ## - Set initial volume in MobileDevice, before connecting device. Values 0..20. Alias 'msiv' 
+ mobileincvol - increment volume on mobile. Alias 'miv' 
+ mobiledecvol - decrement volume on mobile. Alias 'mdv' 
+ help - prints help.
+
+
+
+
+
+  
